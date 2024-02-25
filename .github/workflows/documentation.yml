@@ -32,16 +32,15 @@ jobs:
 
     - name: Update Log Document
       run: |
-        echo "### $(date)" >> my-docusaurus-project/docs/log.md
-        # Add any information you want to log (e.g., branch name, commit details)
-        echo "Commit: $GITHUB_SHA" >> my-docusaurus-project/docs/log.md
-        echo "Message: $(git log --format=%B -n 1 $GITHUB_SHA)" >> my-docusaurus-project/docs/log.md
-        echo "Collaborator: ${{ github.actor }}" >> my-docusaurus-project/docs/log.md
+        echo "### $(TZ='Asia/Kolkata' date)\n" >> my-docusaurus-project/docs/log.md
+        echo "Commit: $GITHUB_SHA\n" >> my-docusaurus-project/docs/log.md
+        echo "Message: $(git log --format=%B -n 1 $GITHUB_SHA)\n" >> my-docusaurus-project/docs/log.md
+        echo "Collaborator: ${{ github.actor }}\n" >> my-docusaurus-project/docs/log.md
 
         if [ ${{ steps.generate-docs.outcome }} == "success" ]; then
-          echo "Status: Documentation generation successful" >> my-docusaurus-project/docs/log.md
+          echo "Status: Documentation generation successful\n" >> my-docusaurus-project/docs/log.md
         else
-          echo "Status: Documentation generation failed" >> my-docusaurus-project/docs/log.md
+          echo "Status: Documentation generation failed\n" >> my-docusaurus-project/docs/log.md
         fi
 
     - name: Commit and Push Changes
