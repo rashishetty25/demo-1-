@@ -53,8 +53,6 @@ jobs:
           echo -e "Changes:\n$(git log --pretty=format:'%h %s (%an) %b' --grep='^Change')\n" >> my-docusaurus-project/docs/log.md
 
       - name: Commit and Push Changes
-
-      - name: Commit and Push Changes
         run: |
           git config --global user.email "rashishetty25@gmail.com"
           git config --global user.name "rashishetty25"
