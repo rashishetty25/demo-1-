@@ -19,7 +19,7 @@ jobs:
         run: npm install
 
       - name: Run Dependabot
-        uses: dependabot/dependabot-core@2
+        uses: dependabot/dependabot-core@main  # Use 'main' branch reference
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           command: "npm update"
