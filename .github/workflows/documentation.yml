@@ -1,0 +1,45 @@
+name: Documentation Generation
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install Dependencies
+      run: |
+        cd my-docusaurus-project
+        npm install
+
+    - name: Generate Documentation
+      run: |
+        cd my-docusaurus-project
+        npx docusaurus build
+
+    - name: Update Log Document
+      run: |
+        echo "### $(date)" >> documents/log.md
+        # Add any information you want to log (e.g., branch name, commit details)
+        echo "Branch: $GITHUB_REF" >> documents/log.md
+        echo "Commit: $GITHUB_SHA" >> documents/log.md
+        echo "Message: $(git log --format=%B -n 1 $GITHUB_SHA)" >> documents/log.md
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add documents/log.md
+        git commit -m "Update documentation log [skip ci]"
+        git push
