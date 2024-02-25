@@ -3,10 +3,9 @@ name: Dependabot
 
 on:
   push:
-    branches:
-      - main  # Adjust this based on your main branch name
+  
   schedule:
-    - cron: "*/2 * * * *"  # Run every day, adjust the schedule as needed
+    - cron: "*/5 * * * *"  # Run every day, adjust the schedule as needed
 
 jobs:
   dependabot:
@@ -20,4 +19,7 @@ jobs:
         run: npm install
 
       - name: Run Dependabot
-        run: npx dependabot 
+        uses: dependabot/dependabot-core@2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          command: "npm update"
