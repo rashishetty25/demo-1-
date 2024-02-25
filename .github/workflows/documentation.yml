@@ -2,8 +2,6 @@ name: Documentation Generation
 
 on:
   push:
-    branches:
-      - '*'
 
 jobs:
   generate-docs:
