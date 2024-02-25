@@ -30,7 +30,7 @@ jobs:
         npx docusaurus build
       continue-on-error: true
 
-- name: Update Log Document
+name: Update Log Document
   run: |
     echo -e "### $(TZ='Asia/Kolkata' date)\n" >> my-docusaurus-project/docs/log.md
     # Add any information you want to log (e.g., branch name, commit details)
