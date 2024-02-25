@@ -2,6 +2,8 @@ name: Documentation Generation
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
   generate-docs:
@@ -22,9 +24,11 @@ jobs:
         npm install
 
     - name: Generate Documentation
+      id: generate-docs
       run: |
         cd my-docusaurus-project
         npx docusaurus build
+      continue-on-error: true
 
     - name: Update Log Document
       run: |
@@ -33,6 +37,12 @@ jobs:
         echo "Branch: $GITHUB_REF" >> my-docusaurus-project/docs/log.md
         echo "Commit: $GITHUB_SHA" >> my-docusaurus-project/docs/log.md
         echo "Message: $(git log --format=%B -n 1 $GITHUB_SHA)" >> my-docusaurus-project/docs/log.md
+        if [ ${{ steps.generate-docs.outcome }} == "success" ]; then
+          echo "Status: Documentation generation successful" >> my-docusaurus-project/docs/log.md
+        else
+          echo "Status: Documentation generation failed" >> my-docusaurus-project/docs/log.md
+          echo "Failure by: ${{ github.actor }}" >> my-docusaurus-project/docs/log.md
+        fi
 
     - name: Commit and Push Changes
       run: |
