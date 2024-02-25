@@ -38,6 +38,6 @@ jobs:
       run: |
         git config --global user.email "rashishetty25@gmail.com"
         git config --global user.name "rashishetty25"
-        git add documents/my-docusaurus-project/docs/log.md
+        git add my-docusaurus-project/docs/log.md
         git commit -m "Update documentation log [skip ci]"
         git push origin main
