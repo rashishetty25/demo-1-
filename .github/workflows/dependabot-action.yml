@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main  # Adjust this based on your main branch name
+  schedule:
+    - cron: "*/2 * * * *"  # Run every day, adjust the schedule as needed
 
 jobs:
   dependabot:
@@ -14,13 +16,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "14"
-
       - name: Install dependencies
         run: npm install
 
       - name: Run Dependabot
-        run: npx dependabot
+        run: npx dependabot 
