@@ -32,11 +32,23 @@ jobs:
 
       - name: Update Log Document
         run: |
-          echo -e "### $(TZ='Asia/Kolkata' date)\tCommit: $GITHUB_SHA\tMessage: $(git log --format=%B -n 1 $GITHUB_SHA)\tAuthor: $(git log --format=%an -n 1 $GITHUB_SHA)\tAuthor Email: $(git log --format=%ae -n 1 $GITHUB_SHA)\tCommitter: $(git log --format=%cn -n 1 $GITHUB_SHA)\tCommitter Email: $(git log --format=%ce -n 1 $GITHUB_SHA)\tBranch: $GITHUB_REF\tRepository: ${{ github.repository }}\tWorkflow Run ID: ${{ github.run_id }}\t" >> my-docusaurus-project/docs/log.md
+          echo -e "### $(TZ='Asia/Kolkata' date)\t" >> my-docusaurus-project/docs/log.md
+          # Add any information you want to log (e.g., branch name, commit details)
+          echo -e "Commit: $GITHUB_SHA\t" >> my-docusaurus-project/docs/log.md
+          echo -e "Message: $(git log --format=%B -n 1 $GITHUB_SHA)\t" >> my-docusaurus-project/docs/log.md
+          echo -e "Author: $(git log --format=%an -n 1 $GITHUB_SHA)\t" >> my-docusaurus-project/docs/log.md
+          echo -e "Author Email: $(git log --format=%ae -n 1 $GITHUB_SHA)\t" >> my-docusaurus-project/docs/log.md
+          echo -e "Committer: $(git log --format=%cn -n 1 $GITHUB_SHA)\t" >> my-docusaurus-project/docs/log.md
+          echo -e "Committer Email: $(git log --format=%ce -n 1 $GITHUB_SHA)\t" >> my-docusaurus-project/docs/log.md
+          echo -e "Branch: $GITHUB_REF\t" >> my-docusaurus-project/docs/log.md
+          echo -e "Repository: ${{ github.repository }}\t" >> my-docusaurus-project/docs/log.md
+          echo -e "Workflow Run ID: ${{ github.run_id }}\t" >> my-docusaurus-project/docs/log.md
           if [ ${{ steps.generate-docs.outcome }} == "success" ]; then
-            echo -e "Status: Documentation generation successful\tURL: [View Actions](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})\t" >> my-docusaurus-project/docs/log.md
+            echo -e "Status: Documentation generation successful\t" >> my-docusaurus-project/docs/log.md
+            echo -e "URL: [View Actions](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})\t" >> my-docusaurus-project/docs/log.md
           else
-            echo -e "Status: Documentation generation failed\tFailure by: ${{ github.actor }}\t" >> my-docusaurus-project/docs/log.md
+            echo -e "Status: Documentation generation failed\t" >> my-docusaurus-project/docs/log.md
+            echo -e "Failure by: ${{ github.actor }}\t" >> my-docusaurus-project/docs/log.md
           fi
 
       - name: Commit and Push Changes
