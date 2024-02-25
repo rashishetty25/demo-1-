@@ -46,11 +46,6 @@ jobs:
             echo -e "Status: Documentation generation failed\n" >> my-docusaurus-project/docs/log.md
             echo -e "Failure by: ${{ github.actor }}\n" >> my-docusaurus-project/docs/log.md
           fi
-          echo -e "\nGit Log:\n" >> my-docusaurus-project/docs/log.md
-          echo -e "Pulls:\n$(git log --merges --pretty=format:'%h %s (%an) %b' --grep='^Merge pull request')\n" >> my-docusaurus-project/docs/log.md
-          echo -e "Pushes:\n$(git log --pretty=format:'%h %s (%an) %b' --grep='^Push')\n" >> my-docusaurus-project/docs/log.md
-          echo -e "Clones:\n$(git log --pretty=format:'%h %s (%an) %b' --grep='^Clone')\n" >> my-docusaurus-project/docs/log.md
-          echo -e "Changes:\n$(git log --pretty=format:'%h %s (%an) %b' --grep='^Change')\n" >> my-docusaurus-project/docs/log.md
 
       - name: Commit and Push Changes
         run: |
