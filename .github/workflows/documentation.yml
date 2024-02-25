@@ -33,13 +33,9 @@ jobs:
       - name: Update Log Document
         run: |
           echo "### $(TZ='Asia/Kolkata' date)" >> my-docusaurus-project/docs/log.md
-          # Add any information you want to log (e.g., branch name, commit details)
-          echo -e "Commit: $GITHUB_SHA\n" >> my-docusaurus-project/docs/log.md
           echo -e "Message: $(git log --format=%B -n 1 $GITHUB_SHA)\n" >> my-docusaurus-project/docs/log.md
           echo -e "Author: $(git log --format=%an -n 1 $GITHUB_SHA)\n" >> my-docusaurus-project/docs/log.md
           echo -e "Author Email: $(git log --format=%ae -n 1 $GITHUB_SHA)\n" >> my-docusaurus-project/docs/log.md
-          echo -e "Committer: $(git log --format=%cn -n 1 $GITHUB_SHA)\n" >> my-docusaurus-project/docs/log.md
-          echo -e "Committer Email: $(git log --format=%ce -n 1 $GITHUB_SHA)\n" >> my-docusaurus-project/docs/log.md
           echo -e "Branch: $GITHUB_REF\n" >> my-docusaurus-project/docs/log.md
           echo -e "Repository: ${{ github.repository }}\n" >> my-docusaurus-project/docs/log.md
           echo -e "Workflow Run ID: ${{ github.run_id }}\n" >> my-docusaurus-project/docs/log.md
