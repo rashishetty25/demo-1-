@@ -30,11 +30,11 @@ jobs:
 
     - name: Update Log Document
       run: |
-        echo "### $(date)" >> documents/log.md
+        echo "### $(date)" >> my-docusaurus-project/docs/log.md
         # Add any information you want to log (e.g., branch name, commit details)
-        echo "Branch: $GITHUB_REF" >> documents/log.md
-        echo "Commit: $GITHUB_SHA" >> documents/log.md
-        echo "Message: $(git log --format=%B -n 1 $GITHUB_SHA)" >> documents/log.md
+        echo "Branch: $GITHUB_REF" >> my-docusaurus-project/docs/log.md
+        echo "Commit: $GITHUB_SHA" >> my-docusaurus-project/docs/log.md
+        echo "Message: $(git log --format=%B -n 1 $GITHUB_SHA)" >> my-docusaurus-project/docs/log.md
 
     - name: Commit and Push Changes
       run: |
